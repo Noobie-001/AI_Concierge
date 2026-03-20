@@ -3,8 +3,8 @@ import { listProposals } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
-export default function Home() {
-  const initialHistory = listProposals();
+export default async function Home() {
+  const initialHistory = await listProposals();
 
   return <ConciergeShell initialHistory={initialHistory} />;
 }

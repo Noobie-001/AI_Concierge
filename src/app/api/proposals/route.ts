@@ -7,14 +7,14 @@ import { createProposalRequestSchema } from "@/lib/schema";
 export const runtime = "nodejs";
 
 export async function GET() {
-  return NextResponse.json({ proposals: listProposals() });
+  return NextResponse.json({ proposals: await listProposals() });
 }
 
 export async function POST(request: Request) {
   try {
     const payload = createProposalRequestSchema.parse(await request.json());
     const generatedProposal = await generateEventProposal(payload.prompt);
-    const storedProposal = saveProposal({
+    const storedProposal = await saveProposal({
       prompt: payload.prompt,
       proposal: generatedProposal.proposal,
       source: generatedProposal.source,

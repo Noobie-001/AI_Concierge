@@ -11,6 +11,7 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
+    "@netlify/blobs": "^10.7.4",
     "better-sqlite3": "latest",
     "next": "latest",
     "openai": "latest",

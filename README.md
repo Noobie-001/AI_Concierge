@@ -60,7 +60,8 @@ This keeps the app functional locally, but the real assignment flow should be ru
 
 ## Database persistence
 
-- The app stores proposals in `data/concierge.db`
+- Local development stores proposals in `data/concierge.db`
+- Netlify deploys store proposals in Netlify Blobs
 - Refreshing the page keeps prior searches visible
 - Each saved record includes the original prompt, generated venue proposal, timestamp, and source mode
 
@@ -100,6 +101,6 @@ Returns all saved proposals in reverse chronological order.
 
 ## Notes for deployment
 
-- This local version uses SQLite for simplicity and fast setup
-- If you want to deploy publicly, the easiest upgrade is swapping the database layer to Supabase, PostgreSQL, or MongoDB
-- The frontend and API routes are already organized so the persistence layer can be replaced without redesigning the UI
+- Local development uses SQLite for simplicity and fast setup
+- Netlify deploys automatically switch to Netlify Blobs so the app does not rely on a writable local filesystem
+- If you want to deploy anywhere other than Netlify, the next easiest upgrade is swapping the database layer to Supabase, PostgreSQL, or MongoDB

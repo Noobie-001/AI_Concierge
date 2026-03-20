@@ -18,13 +18,18 @@ export const eventProposalSchema = z.object({
   highlights: z.array(z.string().trim().min(2).max(80)).min(2).max(4),
 });
 
+export const storedProposalSchema = eventProposalSchema.extend({
+  id: z.number().int().nonnegative(),
+  prompt: z
+    .string()
+    .trim()
+    .min(12, "Please provide a little more detail for the event brief.")
+    .max(500, "Keep the request under 500 characters so the planner stays focused."),
+  source: proposalSourceSchema,
+  createdAt: z.string().datetime(),
+});
+
 export type ProposalSource = z.infer<typeof proposalSourceSchema>;
 export type CreateProposalRequest = z.infer<typeof createProposalRequestSchema>;
 export type EventProposal = z.infer<typeof eventProposalSchema>;
-
-export type StoredProposal = EventProposal & {
-  id: number;
-  prompt: string;
-  source: ProposalSource;
-  createdAt: string;
-};
+export type StoredProposal = z.infer<typeof storedProposalSchema>;
